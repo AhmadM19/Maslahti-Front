@@ -11,7 +11,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    axios.get("https://localhost:7249/api/Test/dbtest")
+    axios.get("https://localhost:7249/api/Auth/dbtest")
     .then((response) => {
       if (response.status === 200) { // HTTP status 200 = OK
         navigate("/home");
