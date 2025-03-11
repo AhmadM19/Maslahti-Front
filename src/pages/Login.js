@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -8,11 +10,19 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email === "admin@example.com" && password === "password") {
-      navigate("/home");
-    } else {
-      alert("Invalid credentials");
-    }
+    
+    axios.get("https://localhost:7249/api/Test/dbtest")
+    .then((response) => {
+      if (response.status === 200) { // HTTP status 200 = OK
+        navigate("/home");
+        console.log("Request successful:", response.data);
+      }
+      else {
+        console.log("Invalid credentials:", response.data);
+        alert("Invalid credentials",response.data);
+      }
+    })
+    .catch((error) => console.error("Error:", error));
   };
 
   return (
